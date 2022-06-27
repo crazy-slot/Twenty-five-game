@@ -19,7 +19,9 @@
     "downlevelIteration": true,
     "baseUrl": "src",
     "paths": {
-      "~pages/*": ["pages/*"]
+      "~pages/*": ["pages/*"],
+      "~components/*": ["components/*"],
+      "~styles/*": ["styles/*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

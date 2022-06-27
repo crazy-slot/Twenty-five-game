@@ -5,7 +5,7 @@ const nextConfig = {
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	// TODO: Te be configured
-	enabled: true,
+	enabled: false,
 });
 
 module.exports = withBundleAnalyzer(nextConfig);
