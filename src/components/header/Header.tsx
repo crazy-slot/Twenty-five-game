@@ -1,46 +1,25 @@
-import { useEffect, useState } from 'react';
 import type { FC } from 'react';
-
-interface IHeaderProps {
-	gameOver: () => void;
-	reset: () => void;
-	score: number;
-}
+import { useTimer } from '~components/header/services';
+import type { IHeaderProps } from '~components/header/types';
 
 const Header: FC<IHeaderProps> = ({ score, reset, gameOver }) => {
-	const [timer, setTimer] = useState(25);
+	const [timer, setTimer] = useTimer({ score, reset, gameOver });
 
-	useEffect(() => {
-		if (timer > 0) {
-			const interval = setInterval(() => {
-				setTimer(timer - 1);
-			}, 1000);
-			const clearTimer = () => {
-				clearInterval(interval);
-			};
-			return clearTimer;
-		}
-		gameOver();
-		return reset;
-	}, [gameOver, reset, timer]);
+	const handleClickReset = () => {
+		reset();
+		setTimer(25);
+	};
 
-	useEffect(() => {
-		if (score > 0) {
-			setTimer(timer + 5);
-		}
-	}, [score]);
+	const isInProgress = timer > 0;
 
 	return (
 		<div className="flex justify-between items-center pb-4 text-gray-50">
-			<div>{score} Points</div>
-			<div>{timer} seconds</div>
+			<div className="border-2 rounded-md p-3 bg-amber-500 w-24">{score} Points</div>
+			<div>{timer} Seconds</div>
 			<button
-				className={`border-2 rounded-md p-3  ${timer > 0 ? 'bg-gray-600' : 'bg-indigo-600 hover:bg-indigo-700'}`}
-				disabled={timer > 0}
-				onClick={() => {
-					reset();
-					setTimer(25);
-				}}
+				className={`border-2 rounded-md p-3 w-24 ${isInProgress ? 'bg-gray-600' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+				disabled={isInProgress}
+				onClick={handleClickReset}
 			>
 				Reset
 			</button>
