@@ -24,6 +24,12 @@ const Header: FC<IHeaderProps> = ({ score, reset, gameOver }) => {
 		return reset;
 	}, [gameOver, reset, timer]);
 
+	useEffect(() => {
+		if (score > 0) {
+			setTimer(timer + 5);
+		}
+	}, [score]);
+
 	return (
 		<div className="flex justify-between items-center pb-4 text-gray-50">
 			<div>{score} Points</div>
