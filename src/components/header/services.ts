@@ -17,7 +17,7 @@ export const useTimer = ({ score, reset, gameOver }: IHeaderProps): [number, Dis
 		}
 		gameOver();
 		return reset;
-	}, [gameOver, reset, timer]);
+	}, [timer]);
 
 	useEffect(() => {
 		if (score > 0) {
